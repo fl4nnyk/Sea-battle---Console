@@ -139,7 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player\ComputerPlayer\ComputerPlayer.h" />
-    <ClInclude Include="source\Game\HumanPlayer.h" />
+    <ClInclude Include="include\Player\HumanPlayer\HumanPlayer.h" />
     <ClInclude Include="include\Game\Game.h" />
     <ClInclude Include="include\GameBoard\GameBoard.h" />
     <ClInclude Include="include\Player\Player.h" />
