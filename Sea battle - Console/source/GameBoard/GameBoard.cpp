@@ -1,50 +1,53 @@
 #include <GameBoard/GameBoard.h>  
 
 GameBoard::GameBoard()  
-{  
-   const int width = 10;  
-   const int height = 10;  
-
-   bool miss = false;
-   bool ship = false;
-   bool hit = false;
-
-   char board[width][height];  
-   for (int i = 0; i < width; i++)  
-   {  
-       for (int j = 0; j < height; j++)  
-       {  
-           board[i][j] = '~';  
-       }  
-   }
-
-   for (int i = 0; i < width; i++)
-   {
-	   for (int j = 0; j < height; j++)
-	   {
-		   std::cout << board[i][j];
-	   }
-	   std::cout << std::endl;
-   }
-
-   bool isGameRunning = true;
-   bool isPlayerTurn = true;
-   bool isPlayerWin = false;
-   bool isComputerWin = false;
-   while (isGameRunning)
-   {
-	   if (isPlayerTurn)
-	   {
-		   // Player turn
-	   }
-	   else
-	   {
-		   // Computer turn
-	   }
-   }
-   
+{    
+	board = std::vector<std::vector<char>>(5, std::vector<char>(5, '~'));
+	shipsRemaining = 3;
 }  
 
-GameBoard::~GameBoard()  
-{  
+void GameBoard::placeShips(int x, int y)
+{
+	if (board[x][y] == '~')
+	{
+		board[x][y] = 'S';
+	}
 }
+
+bool GameBoard::reciveShot(int x, int y)
+{
+	if (board[x][y] == 'S')
+	{
+		board[x][y] = 'X';
+		shipsRemaining--;
+		return true;
+	}
+	else
+	{
+		board[x][y] = 'O';
+		return false;
+	}
+}
+
+void GameBoard::printBoard(bool showShips) const
+{
+	std::cout << "  0 1 2 3 4\n";
+	for (int i = 0; i < 5; i++)
+	{
+		std::cout << i << " ";
+		for (int j = 0; j < 5; j++)
+		{
+			if (board[i][j] == 'X' || board[i][j] == 'O' || showShips)
+				std::cout << board[i][j] << " ";
+			else
+				std::cout << "~ ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+bool GameBoard::allShipsSunk() const
+{
+	return shipsRemaining == 0;
+}
+
